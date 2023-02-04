@@ -1,6 +1,5 @@
 package web.controller;
 
-import org.hibernate.hql.internal.ast.tree.IdentNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,34 +17,39 @@ public class UserController {
     }
 
     @GetMapping(value = "/")
-    public String indexPage(ModelMap model) {
+    public String getUserListPage(ModelMap model) {
         model.addAttribute("list", userService.getUserList());
-        model.addAttribute("user", new User());
-        return "index";
+        return "users";
     }
 
     @GetMapping(value = "delete")
-    public String removeUser(@RequestParam(value = "id") int id) {
-        userService.removeUserById(id);
+    public String deleteUserById(@RequestParam(value = "id") Long id) {
+        userService.deleteUserById(id);
         return "redirect:/";
     }
 
-    @PostMapping(value = "add")
-    public String addUser(@ModelAttribute("user") User user) {
-        userService.saveUser(user);
-        return "redirect:/";
+    @GetMapping(value = "newUser")
+    public String getUserAddForm(ModelMap model) {
+        model.addAttribute("user", new User());
+        return "newUser";
     }
 
     @GetMapping(value = "edit")
-    public String editUser(@RequestParam(value = "id", required = false) Integer id, ModelMap model) {
-        System.out.println(userService.getUserById(id));
+    public String getUserEditForm(@RequestParam(value = "id", required = false) Integer id, ModelMap model) {
         model.addAttribute("user", userService.getUserById(id));
         return "edit";
     }
 
-    @PatchMapping("save/{id}")
-    public String updateUser(@ModelAttribute("user") User user, @PathVariable("id") Long id) {
-        userService.updateUser(id, user);
+    @PostMapping("insert")
+    public String insertUser(@ModelAttribute("user") User user) {
+        userService.saveUser(user);
+        return "redirect:/newUser";
+    }
+
+    @PatchMapping("update/{id}")
+    public String updateUser(@ModelAttribute("user") User user) {
+        userService.updateUser(user);
         return "redirect:/";
     }
+
 }

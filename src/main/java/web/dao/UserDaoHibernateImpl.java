@@ -25,12 +25,12 @@ public class UserDaoHibernateImpl implements UserDao {
     }
 
     @Override
-    public void updateUser(Long id, User user) {
+    public void updateUser(User user) {
         entityManager.merge(user);
     }
 
     @Override
-    public void removeUserById(long id) {
+    public void deleteUserById(long id) {
         User user = entityManager.find(User.class, id);
         entityManager.remove(user);
     }

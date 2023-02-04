@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html lang="en"
+<html lang="ru"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Add new User</title>
 </head>
 <body>
-<h1 th:text="User_+${user.getId()}"></h1>
-<form th:action="@{/update/{id}(id = ${user.getId()})}" th:method="PATCH" th:object="${user}">
-    <input type="hidden" name="_method" value="PATCH">
+<h1>New User</h1>
+<form action="insert" method="POST" th:object="${user}">
     <table>
         <tr>
             <td><label for="name">Name</label></td>
@@ -28,5 +27,6 @@
         </tr>
     </table>
 </form>
+<a href="/">Back to UserList</a>
 </body>
 </html>
