@@ -24,10 +24,10 @@ public class DataBaseConfig {
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String DIALECT = "org.hibernate.dialect.MySQL8Dialect";
     private static final String URL = "jdbc:mysql://localhost:3306/spring_hiber";
-    private static final String USER = "root";
+    private static final String USER_NAME = "root";
     private static final String PASSWORD = "VBq&cucxf53(tSfC";
     private static final String SHOW_SQL = "true";
-    private static final String HBM2DDL_AUTO = "update";
+    private static final String HBM2DDL = "update";
 
 
     @Bean
@@ -35,7 +35,7 @@ public class DataBaseConfig {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(DRIVER);
         dataSource.setUrl(URL);
-        dataSource.setUsername(USER);
+        dataSource.setUsername(USER_NAME);
         dataSource.setPassword(PASSWORD);
         return dataSource;
     }
@@ -68,7 +68,7 @@ public class DataBaseConfig {
         Properties properties = new Properties();
         properties.put("hibernate.dialect", DIALECT);
         properties.put("hibernate.show_sql", SHOW_SQL);
-        properties.put("hibernate.hnm2ddl.auto", HBM2DDL_AUTO);
+        properties.put("hibernate.hnm2ddl.auto", HBM2DDL);
         return properties;
     }
 
